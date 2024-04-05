@@ -150,7 +150,7 @@ gösterilen yerdeki false u true yapınız
 ![image](https://github.com/coinsspor/crossfi/assets/38142283/57ffad6d-8108-4e7b-a776-c532219a6560)
 
 
-Hepsi bukadar herşeyi doğu yaptysanız eğer . Aşğıdaki benim api ve rpc linklerim var bu şekide çalıyor olması lazım.
+Hepsi bu kadar herşeyi doğru yaptıysanız eğer , aşağıdaki benim api ve rpc linklerim var bu şekide çalışıyor olması lazım.
 
 [https://crossfi-testnet-api.coinsspor.com/](url)
 
