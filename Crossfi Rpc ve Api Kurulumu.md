@@ -154,3 +154,5 @@ Hepsi bukadar herşeyi doğu yaptysanız eğer . Aşğıdaki benim api ve rpc li
 
 [https://crossfi-testnet-api.coinsspor.com/](url)
 
+[https://crossfi-testnet-rpc.coinsspor.com/](url)
+
