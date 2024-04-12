@@ -80,3 +80,4 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable crossfid
 sudo systemctl start crossfid
+sudo journalctl -u crossfid -f -o cat
