@@ -5,7 +5,6 @@ echo "Please enter your nodename (validator moniker):"
 read NODENAME
 echo "export NODENAME=$NODENAME" >> $HOME/.bash_profile
 
-# Set wallet environment variable if not set
 if [ -z "$WALLET" ]; then
     echo "export WALLET=wallet" >> $HOME/.bash_profile
 fi
@@ -21,20 +20,25 @@ sudo apt install curl build-essential git wget jq make gcc tmux net-tools ccze -
 
 # Install Go only if it is not already installed
 if ! command -v go &> /dev/null; then
-    ver="1.20.2"
-    wget "https://go.dev/dl/go$ver.linux-amd64.tar.gz"
-    sudo rm -rf /usr/local/go
-    sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
-    rm "go$ver.linux-amd64.tar.gz"
-    echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
+    wget "https://go.dev/dl/go1.20.2.linux-amd64.tar.gz"
+    sudo tar -C /usr/local -xzf "go1.20.2.linux-amd64.tar.gz"
+    rm "go1.20.2.linux-amd64.tar.gz"
+    echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
     source ~/.bash_profile
 fi
 
 # Download and setup the Crossfi node
-wget https://github.com/crossfichain/crossfi-node/releases/download/v0.1.1/mineplex-2-node_v0.1.1_linux_amd64.tar.gz
-tar -xzf mineplex-2-node_v0.1.1_linux_amd64.tar.gz
-mv mineplex-chaind $HOME/go/bin/crossfid
-rm mineplex-2-node_v0.1.1_linux_amd64.tar.gz
+download_url="https://github.com/crossfichain/crossfi-node/releases/download/v0.1.1/mineplex-2-node._v0.1.1_linux_amd64.tar.gz"
+wget $download_url -O mineplex-node.tar.gz
+
+if [ $? -eq 0 ]; then
+    tar -xzf mineplex-node.tar.gz
+    mv mineplex-chaind /usr/local/bin/crossfid
+    rm mineplex-node.tar.gz
+else
+    echo "Failed to download the node software, please check the URL."
+    exit 1
+fi
 
 # Initialize the application
 crossfid init $NODENAME --chain-id $CROSSFI_CHAIN_ID
@@ -64,7 +68,7 @@ After=network-online.target
 [Service]
 User=$USER
 WorkingDirectory=$HOME/.mineplex-chain
-ExecStart=/usr/local/go/bin/crossfid start --home $HOME/.mineplex-chain
+ExecStart=/usr/local/bin/crossfid start --home $HOME/.mineplex-chain
 Restart=on-failure
 RestartSec=5
 LimitNOFILE=65535
@@ -75,4 +79,4 @@ EOF
 # Reload systemd, enable and start the service
 sudo systemctl daemon-reload
 sudo systemctl enable crossfid
-sudo systemctl restart crossfid && sudo journalctl -u crossfid -f -o cat
+sudo systemctl start crossfid
