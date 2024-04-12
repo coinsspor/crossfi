@@ -6,7 +6,7 @@ echo "export NODENAME=$NODENAME" >> $HOME/.bash_profile
 if [ ! $WALLET ]; then
     echo "export WALLET=wallet" >> $HOME/.bash_profile
 fi
-echo "export CROSSFI_CHAIN_ID=crossfi-mineplex-mainnet-1" >> $HOME/.bash_profile
+echo "export CROSSFI_CHAIN_ID=mineplex-mainnet-1" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 # Update packages
