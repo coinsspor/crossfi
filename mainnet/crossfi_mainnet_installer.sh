@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Set variables
-NODENAME="<Your_Nodename_Moniker>"
+echo "Please enter your nodename (validator moniker):"
+read NODENAME  # Kullanıcıdan nodename alır
 echo "export NODENAME=$NODENAME" >> $HOME/.bash_profile
-if [ ! $WALLET ]; then
+
+if [ -z "$WALLET" ]; then  # $WALLET değişkeni boş ise
     echo "export WALLET=wallet" >> $HOME/.bash_profile
 fi
 echo "export CROSSFI_CHAIN_ID=mineplex-mainnet-1" >> $HOME/.bash_profile
