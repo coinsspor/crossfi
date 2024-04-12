@@ -32,9 +32,9 @@ fi
 # Download and build binaries
 cd $HOME
 wget https://github.com/crossfichain/crossfi-node/releases/download/v0.1.1/mineplex-2-node._v0.1.1_linux_amd64.tar.gz
-tar -xzfv mineplex-2-node_v0.1.1_linux_amd64.tar.gz
+tar -xzfv mineplex-2-node._v0.1.1_linux_amd64.tar.gz
 mv mineplex-chaind $HOME/go/bin/crossfid
-rm -r mineplex-2-node_v0.1.1_linux_amd64.tar.gz
+rm -r mineplex-2-node._v0.1.1_linux_amd64.tar.gz
 
 # Initialize the application
 crossfid init $NODENAME --chain-id $CROSSFI_CHAIN_ID
